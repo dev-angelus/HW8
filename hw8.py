@@ -39,7 +39,7 @@ def read_student(conn):
         print(e)
 
 def update_student(conn):
-    sql = '''UPDATE student SET fullname = 'genius' WHERE mark > 10.0'''
+    sql = '''UPDATE student SET fullname = 'genius' WHERE mark >= 10.0'''
     try:
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -56,7 +56,8 @@ def delete_student(conn):
         print(e)
 
 def clear_table(conn):
-    sql = '''DELETE FROM student'''
+    # sql = '''DELETE FROM student'''
+    sql = '''DROP TABLE student'''
     try:
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -80,8 +81,8 @@ connection = create_connection(database)
 
 if connection is not None:
     print('All correct')
-    create_table(connection, sql_create_table)
     clear_table(connection)
+    create_table(connection, sql_create_table)
     create_student(connection, ('Nazira', 10.0, 'reading', True))
     create_student(connection, ('Mirlan', 10.0, 'football', False))
     create_student(connection, ('Bektur', 9.0, 'driving', True))
