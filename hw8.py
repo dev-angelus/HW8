@@ -55,6 +55,14 @@ def delete_student(conn):
     except Error as e:
         print(e)
 
+def clear_table(conn):
+    sql = '''DELETE FROM student'''
+    try:
+        cursor = conn.cursor()
+        cursor.execute(sql)
+        conn.commit()
+    except Error as e:
+        print(e)
 
 database = "user2.db"
 
@@ -73,6 +81,7 @@ connection = create_connection(database)
 if connection is not None:
     print('All correct')
     create_table(connection, sql_create_table)
+    clear_table(connection)
     create_student(connection, ('Nazira', 10.0, 'reading', True))
     create_student(connection, ('Mirlan', 10.0, 'football', False))
     create_student(connection, ('Bektur', 9.0, 'driving', True))
